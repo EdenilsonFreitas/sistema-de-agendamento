@@ -1,0 +1,184 @@
+:root {
+  --azul: #1b2a49;
+  --vermelho: #b8322a;
+  --papel: #eef1f5;
+  --branco: #ffffff;
+  --aco: #5d6b82;
+  --linha: #cfd6e0;
+  --erro: #9b1c1c;
+  --raio: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Work Sans", system-ui, sans-serif;
+  background: var(--papel);
+  color: var(--azul);
+  line-height: 1.5;
+}
+
+h1, h2, legend, .horario, .btn {
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+}
+
+/* Cabeçalho com o poste de barbeiro como elemento de destaque */
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem clamp(1rem, 4vw, 3rem);
+  background: var(--azul);
+  color: var(--branco);
+}
+.topo h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; letter-spacing: .02em; }
+.topo p { margin: .25rem 0 0; color: #c5cee0; }
+
+.poste {
+  flex: none;
+  width: 34px;
+  height: 92px;
+  border-radius: 17px;
+  border: 3px solid var(--branco);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--vermelho) 0 10px,
+    var(--branco) 10px 20px,
+    #2f56a8 20px 30px,
+    var(--branco) 30px 40px
+  );
+  background-size: 100% 56px;
+  animation: gira 2.4s linear infinite;
+}
+@keyframes gira { to { background-position: 0 56px; } }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+  align-items: start;
+}
+
+.painel {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+}
+.painel h2 { margin: 0 0 1rem; font-size: 1.5rem; }
+
+fieldset { border: 0; padding: 0; margin: 0 0 1.25rem; }
+legend, label { font-weight: 600; margin-bottom: .5rem; display: block; padding: 0; }
+legend { font-size: 1.05rem; }
+
+.campo { margin-bottom: 1.25rem; }
+input[type="text"], input[type="tel"], input[type="date"] {
+  width: 100%;
+  padding: .7rem .8rem;
+  font: inherit;
+  color: inherit;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--papel);
+}
+input:focus-visible, .btn:focus-visible, button:focus-visible,
+.opcao input:focus-visible + span {
+  outline: 3px solid var(--vermelho);
+  outline-offset: 2px;
+}
+
+/* Opções de serviço e barbeiro */
+.opcoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .6rem; }
+.opcao { position: relative; }
+.opcao input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.opcao span {
+  display: block;
+  padding: .7rem .8rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--papel);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.opcao small { display: block; color: var(--aco); font-weight: 400; }
+.opcao input:checked + span { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+.opcao input:checked + span small { color: #c5cee0; }
+
+/* Horários */
+.horarios { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: .5rem; }
+.horario {
+  padding: .55rem 0;
+  font-size: 1.05rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--papel);
+  color: var(--azul);
+  cursor: pointer;
+}
+.horario[aria-pressed="true"] { background: var(--vermelho); border-color: var(--vermelho); color: var(--branco); }
+.horario:disabled { color: #98a3b5; background: transparent; text-decoration: line-through; cursor: not-allowed; }
+.dica { grid-column: 1 / -1; margin: 0; color: var(--aco); }
+
+.btn {
+  width: 100%;
+  padding: .85rem;
+  font-size: 1.15rem;
+  letter-spacing: .03em;
+  border: 0;
+  border-radius: var(--raio);
+  background: var(--vermelho);
+  color: var(--branco);
+  cursor: pointer;
+}
+.btn:hover { background: #9c2a23; }
+
+.erro { color: var(--erro); font-weight: 500; margin: 0 0 1rem; }
+
+/* Lista de agendamentos */
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.lista li {
+  padding: .8rem;
+  border: 1px solid var(--linha);
+  border-left: 5px solid var(--vermelho);
+  border-radius: var(--raio);
+  display: flex;
+  justify-content: space-between;
+  gap: .75rem;
+}
+.lista strong { display: block; }
+.lista span { color: var(--aco); font-size: .92rem; }
+.cancelar {
+  align-self: center;
+  background: none;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: .4rem .7rem;
+  font: inherit;
+  color: var(--erro);
+  cursor: pointer;
+}
+.cancelar:hover { background: #fbeaea; }
+.vazio { color: var(--aco); border: 1px dashed var(--linha) !important; border-left-width: 1px !important; }
+
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  background: var(--azul);
+  color: var(--branco);
+  padding: .8rem 1.2rem;
+  border-radius: var(--raio);
+  max-width: 90vw;
+}
+
+@media (max-width: 800px) {
+  .layout { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .poste { animation: none; }
+  * { transition: none !important; }
+}

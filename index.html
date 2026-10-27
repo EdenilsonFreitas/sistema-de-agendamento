@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barbearia Navalha — Agendamento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="poste" aria-hidden="true"></div>
+    <div>
+      <h1>Barbearia Navalha</h1>
+      <p>Escolha o serviço, o barbeiro e o horário. Seg a sáb, das 9h às 19h.</p>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="painel" aria-labelledby="t-agendar">
+      <h2 id="t-agendar">Novo agendamento</h2>
+
+      <form id="form" novalidate>
+        <fieldset>
+          <legend>Serviço</legend>
+          <div id="servicos" class="opcoes"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Barbeiro</legend>
+          <div id="barbeiros" class="opcoes"></div>
+        </fieldset>
+
+        <div class="campo">
+          <label for="data">Data</label>
+          <input type="date" id="data" required>
+        </div>
+
+        <fieldset>
+          <legend>Horário</legend>
+          <div id="horarios" class="horarios">
+            <p class="dica">Escolha serviço, barbeiro e data para ver os horários.</p>
+          </div>
+        </fieldset>
+
+        <div class="campo">
+          <label for="nome">Seu nome</label>
+          <input type="text" id="nome" autocomplete="name" required>
+        </div>
+
+        <div class="campo">
+          <label for="telefone">WhatsApp</label>
+          <input type="tel" id="telefone" placeholder="(84) 99999-9999" autocomplete="tel" required>
+        </div>
+
+        <p id="erro" class="erro" role="alert" hidden></p>
+        <button type="submit" class="btn">Confirmar agendamento</button>
+      </form>
+    </section>
+
+    <section class="painel" aria-labelledby="t-lista">
+      <h2 id="t-lista">Agendamentos</h2>
+      <ul id="lista" class="lista"></ul>
+    </section>
+  </main>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
